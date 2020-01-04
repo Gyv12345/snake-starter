@@ -2,12 +2,14 @@
 package cn.yt4j.swagger;
 
 
+import cn.yt4j.swagger.condition.SwaggerCondition;
 import cn.yt4j.swagger.property.SwaggerProperty;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -25,7 +27,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableAutoConfiguration
 @EnableConfigurationProperties({SwaggerProperty.class})
-@ConditionalOnProperty(name = "medical.swagger.enabled", matchIfMissing = true)
+@Conditional(SwaggerCondition.class)
+@ConditionalOnProperty(name = "snake.swagger.enabled", matchIfMissing = true)
 public class SwaggerAutoConfiguration {
 
     @Bean
