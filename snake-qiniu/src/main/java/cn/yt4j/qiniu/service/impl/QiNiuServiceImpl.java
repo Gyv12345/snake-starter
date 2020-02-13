@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 
 /**
- * @author gyv12345
+ * @author gyv12345@163.com
  */
 @Service
 public class QiNiuServiceImpl implements QiNiuService {
@@ -40,6 +40,11 @@ public class QiNiuServiceImpl implements QiNiuService {
         }
         return response;
     }
+
+    @Override
+    public void deleteFile(String key) throws QiniuException {
+        bucketManager.delete(qiNiuProperties.getBucketName(), key);
+    }
     /**
      * 获取上传凭证，覆盖上传
      */
@@ -47,13 +52,10 @@ public class QiNiuServiceImpl implements QiNiuService {
         return this.auth.uploadToken(qiNiuProperties.getBucketName(), fileName);
     }
 
-    @Override
-    public void deleteFile(String key) throws QiniuException {
-        bucketManager.delete(qiNiuProperties.getBucketName(), key);
-    }
-
-    @Override
-    public String getUploadToken() throws QiniuException {
+    private String getUploadToken(){
         return this.auth.uploadToken(qiNiuProperties.getBucketName());
     }
+
+
+
 }

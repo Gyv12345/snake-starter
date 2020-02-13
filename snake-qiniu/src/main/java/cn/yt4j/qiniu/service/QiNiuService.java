@@ -28,12 +28,5 @@ public interface QiNiuService {
      */
     void deleteFile(String key) throws QiniuException;
 
-    /**
-     * 获取上传token
-     * <p>获取token</p>
-     *
-     * @return 返回String
-     * @throws QiniuException 抛出QiniuException异常
-     */
-    String getUploadToken() throws QiniuException;
+
 }
